@@ -7,6 +7,13 @@ int	*random_array(unsigned int size)
 	int	*array;
 
 	array = (int *)malloc(size * sizeof(int));
+
+	if (array == NULL)
+	{
+		fprintf(stderr, "Error: memory allocation failed.\n");
+		exit(1);
+	}
+	
 	for (unsigned int i = 0; i < size; i++)
 	{
 		array[i] = rand();
