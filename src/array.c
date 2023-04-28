@@ -22,6 +22,7 @@ void	print_array(Array *array)
 	{
 		printf("%d ", array->data[i]);
 	}
+	printf("%s", "\n\n");
 }
 
 Array	*random_array(unsigned int size)

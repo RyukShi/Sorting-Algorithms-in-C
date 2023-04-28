@@ -23,13 +23,10 @@ int	main(void)
 	if (VERBOSE)
 		print_array(array);
 	t1 = start_timer();
-	bubble_sort(array);
+	insertion_sort(array);
 	time_taken = get_execution_time(t1);
 	if (VERBOSE)
-	{
-		printf("%s", "\n\n");
 		print_array(array);
-	}
 	write_in_file(execution_time_file, time_taken);
 	/* check if the array is sorted */
 	sorted = is_sorted(array);
