@@ -23,7 +23,7 @@ int	main(void)
 	if (VERBOSE)
 		print_array(array);
 	t1 = start_timer();
-	insertion_sort(array);
+	selection_sort(array);
 	time_taken = get_execution_time(t1);
 	if (VERBOSE)
 		print_array(array);

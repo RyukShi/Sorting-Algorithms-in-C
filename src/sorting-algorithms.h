@@ -5,5 +5,6 @@
 
 extern void	bubble_sort(Array *array);
 extern void	insertion_sort(Array *array);
+extern void	selection_sort(Array *array);
 
 #endif /* SORTING_ALGORITHMS_H */
