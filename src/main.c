@@ -17,13 +17,13 @@ int	main(void)
 	double			time_taken;
 	FILE			*execution_time_file;
 
-	size = 100000;
+	size = 1000000;
 	array = random_array(size);
 	execution_time_file = open_file("execution_time");
 	if (VERBOSE)
 		print_array(array);
 	t1 = start_timer();
-	selection_sort(array);
+	merge_sort(array, 0, array->size - 1);
 	time_taken = get_execution_time(t1);
 	if (VERBOSE)
 		print_array(array);
