@@ -6,6 +6,8 @@
 
 bool	is_sorted(Array *array)
 {
+	if (array->size == 1)
+		return (true);
 	for (unsigned int i = 0; i < array->size - 1; i++)
 	{
 		if (array->data[i] > array->data[i + 1])
