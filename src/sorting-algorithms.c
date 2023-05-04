@@ -149,7 +149,7 @@ void	quick_sort(Array *array, int start, int end)
 
 void	counting_sort(Array *array)
 {
-	int range;
+	int	range;
 	int	*count;
 	int	*output;
 
@@ -174,4 +174,37 @@ void	counting_sort(Array *array)
 		array->data[i] = output[i];
 	free(count);
 	free(output);
+}
+
+static void	counting_sort_two(Array *array, int place)
+{
+	int	freq[10] = {0};
+	int	*output;
+
+	output = (int *)malloc(array->size * sizeof(int));
+	for (unsigned int i = 0; i < array->size; i++)
+		freq[(array->data[i] / place) % 10]++;
+	for (int i = 1; i < 10; i++)
+		freq[i] += freq[i - 1];
+	for (int i = array->size - 1; i >= 0; i--)
+	{
+		output[freq[(array->data[i] / place) % 10] - 1] = array->data[i];
+		freq[(array->data[i] / place) % 10]--;
+	}
+	for (unsigned int i = 0; i < array->size; i++)
+		array->data[i] = output[i];
+	free(output);
+}
+
+void	radix_sort(Array *array)
+{
+	int mul, max;
+	mul = 1;
+	max = array->max;
+	while (max)
+	{
+		counting_sort_two(array, mul);
+		mul *= 10;
+		max /= 10;
+	}
 }

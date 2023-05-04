@@ -10,5 +10,6 @@ extern void	selection_sort(Array *array);
 extern void	merge_sort(Array *array, unsigned int left, unsigned int right);
 extern void	quick_sort(Array *array, int start, int end);
 extern void	counting_sort(Array *array);
+extern void radix_sort(Array *array);
 
 #endif /* SORTING_ALGORITHMS_H */

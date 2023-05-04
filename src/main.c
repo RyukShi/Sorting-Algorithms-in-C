@@ -24,7 +24,7 @@ int	main(void)
 	if (VERBOSE)
 		print_array(array);
 	t1 = start_timer();
-	counting_sort(array);
+	radix_sort(array);
 	time_taken = get_execution_time(t1);
 	if (VERBOSE)
 		print_array(array);
