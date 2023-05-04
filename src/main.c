@@ -20,10 +20,11 @@ int	main(void)
 	size = 1000000;
 	array = random_array(size);
 	execution_time_file = open_file("execution_time");
+	find_min_and_max(array);
 	if (VERBOSE)
 		print_array(array);
 	t1 = start_timer();
-	quick_sort(array, 0, array->size - 1);
+	counting_sort(array);
 	time_taken = get_execution_time(t1);
 	if (VERBOSE)
 		print_array(array);
