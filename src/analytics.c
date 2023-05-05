@@ -34,7 +34,8 @@ double	get_execution_time(clock_t t1)
 	return (((double)t2 - t1) / CLOCKS_PER_SEC);
 }
 
-void	write_in_file(FILE *fptr, double time_taken)
+void	write_in_file(FILE *fptr, double time_taken, char *algorithm,
+		unsigned int size)
 {
-	fprintf(fptr, "%f\n", time_taken);
+	fprintf(fptr, "%f,%s,%u\n", time_taken, algorithm, size);
 }
