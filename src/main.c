@@ -35,7 +35,7 @@ static void	analytics(char *algorithm_names[],
 						unsigned repeat,
 						unsigned start_size,
 						unsigned max_size,
-						unsigned mult,
+						float mult,
 						unsigned algo_num)
 {
 	Array	*array;
@@ -98,16 +98,16 @@ int	main(void)
 		4,
 		10000,
 		1000000,
-		10,
+		1.50f,
 		3);
 	analytics(
 		slowest_algo_names,
 		slowest_algorithms,
 		execution_time_file,
 		2,
-		1024,
-		262144,
-		2,
+		1000,
+		250000,
+		1.50f,
 		4);
 	close_file(execution_time_file);
 	return (EXIT_SUCCESS);
