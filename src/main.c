@@ -8,10 +8,6 @@
 #include <time.h>
 
 #define VERBOSE 1
-#define ALGO_NUM 7
-#define REPEAT 4
-#define START_SIZE 1000
-#define MAX_SIZE 1000000
 
 static void	merge_sort_wrapper(Array *array)
 {
@@ -23,44 +19,41 @@ static void	quick_sort_wrapper(Array *array)
 	quick_sort(array, 0, array->size - 1);
 }
 
-static double	average(double *times)
+static double	average(double *times, unsigned n)
 {
 	double	sum;
 
 	sum = 0;
-	for (unsigned int i = 0; i < REPEAT; i++)
+	for (unsigned i = 0; i < n; i++)
 		sum += times[i];
-	return (sum / REPEAT);
+	return (sum / n);
 }
 
 static void	analytics(char *algorithm_names[],
 						void (*sorting_algorithms[])(Array *array),
-						FILE *f)
+						FILE *f,
+						unsigned repeat,
+						unsigned start_size,
+						unsigned max_size,
+						unsigned mult,
+						unsigned algo_num)
 {
-	Array			*array;
-	unsigned int	size;
-	clock_t			t1;
-	double			*times;
-	double 			time_taken, avg;
-	bool			sorted;
-	char			*algorithm;
+	Array	*array;
+	clock_t	t1;
+	double	*times;
+	bool	sorted;
+	char	*algorithm;
 
-	times = (double *)malloc(REPEAT * sizeof(double));
-	size = START_SIZE;
-	while (size <= MAX_SIZE)
+	double time_taken, avg;
+	times = (double *)malloc(repeat * sizeof(double));
+	while (start_size <= max_size)
 	{
-		for (unsigned int i = 0; i < ALGO_NUM; i++)
+		for (unsigned i = 0; i < algo_num; i++)
 		{
 			algorithm = algorithm_names[i];
-			if (size == MAX_SIZE && (strcmp(algorithm, "bubble sort") == 0 ||
-				strcmp(algorithm, "counting sort") == 0))
+			for (unsigned j = 0; j < repeat; j++)
 			{
-				/* bypass sorting process cause is too long */
-				continue;
-			}
-			for (unsigned int j = 0; j < REPEAT; j++)
-			{
-				array = random_array(size);
+				array = random_array(start_size);
 				sorted = false;
 				find_min_and_max(array);
 				t1 = start_timer();
@@ -70,34 +63,52 @@ static void	analytics(char *algorithm_names[],
 				sorted = is_sorted(array);
 				if (!sorted)
 					printf("sorting process failed for %s!\n", algorithm);
+				destroy_array(array);
 			}
-			avg = average(times);
+			avg = average(times, repeat);
 			if (VERBOSE)
 				printf("%s: %f second(s), %u random integers\n",
 						algorithm,
 						avg,
-						size);
-			write_in_file(f, avg, algorithm, size);
+						start_size);
+			write_in_file(f, avg, algorithm, start_size);
 		}
-		size *= 10;
+		start_size *= mult;
 	}
 	free(times);
-	destroy_array(array);
 }
 
 int	main(void)
 {
 	FILE	*execution_time_file;
 
-	void (*sorting_algorithms[])(Array * array) = {bubble_sort, insertion_sort,
-		selection_sort, merge_sort_wrapper, quick_sort_wrapper, counting_sort,
-		radix_sort};
-
-	char *algorithm_names[] = {"bubble sort", "insertion sort", "selection sort",
-		"merge sort", "quick sort", "counting sort", "radix sort"};
-
+	void (*fastest_algorithms[])(Array * array) = {
+		merge_sort_wrapper, quick_sort_wrapper, radix_sort};
+	char *fastest_algo_names[] = {
+		"merge sort", "quick sort", "radix sort"};
+	void (*slowest_algorithms[])(Array * array) = {
+		counting_sort, selection_sort, bubble_sort, insertion_sort};
+	char *slowest_algo_names[] = {
+		"counting sort", "selection sort", "bubble sort", "insertion sort"};
 	execution_time_file = open_file("execution_time");
-	analytics(algorithm_names, sorting_algorithms, execution_time_file);
+	analytics(
+		fastest_algo_names,
+		fastest_algorithms,
+		execution_time_file,
+		4,
+		10000,
+		1000000,
+		10,
+		3);
+	analytics(
+		slowest_algo_names,
+		slowest_algorithms,
+		execution_time_file,
+		2,
+		1024,
+		262144,
+		2,
+		4);
 	close_file(execution_time_file);
 	return (EXIT_SUCCESS);
 }
