@@ -17,19 +17,28 @@ def extract_data(file_name: str):
                 'algorithm_name': algorithm_name,
                 'array_size': array_size
             })
-    return data
+    return DataFrame(data)
 
 
-def plot_execution_time(data: list, create_html: bool = False):
+def plot_execution_time(
+    df: DataFrame,
+    html_file_name: str,
+    create_html: bool = False,
+    log_x: bool = False,
+    log_y: bool = False
+):
     fig = px.line(
-        DataFrame(data),
+        df,
         x='array_size', y='time_taken',
         color='algorithm_name',
         labels=dict(array_size='Array size', time_taken='Time taken (seconds)')
     )
-    fig.update_layout(xaxis_type="log")
+    if log_x:
+        fig.update_layout(xaxis_type="log")
+    if log_y:
+        fig.update_layout(yaxis_type="log")
     if create_html:
-        fig.write_html("output.html")
-        print('output.html file created successfully!')
+        fig.write_html(html_file_name)
+        print(f"{html_file_name} file created successfully!")
     else:
         fig.show()
