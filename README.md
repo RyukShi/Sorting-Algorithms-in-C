@@ -8,6 +8,8 @@ These are relevant charts that represent the execution times of different sortin
 
 ![Merge & Quick & Radix chart](./assets/images/merge_quick_radix.png "Merge & Quick & Radix chart")
 
+![Bubble & Insertion & Selection & Counting](./assets/images/bubble_insertion_selection_counting.png "Bubble & Insertion & Selection & Counting")
+
 ## Build Project
 
 ### 1. Create MakeFile
