@@ -46,19 +46,22 @@ Array	*random_array(unsigned int size)
 {
 	Array	*array;
 
-	array = (Array *)malloc(sizeof(Array));
-	array->size = size;
-	array->data = (int *)malloc(size * sizeof(int));
-	if (array->data == NULL)
+	array = malloc(sizeof(Array));
+	if (!array)
 	{
 		fprintf(stderr, "Error: memory allocation failed.\n");
-		exit(1);
+		return (NULL);
 	}
-	srand(time(NULL));
-	for (unsigned int i = 0; i < size; i++)
+	array->size = size;
+	array->data = malloc(size * sizeof(int));
+	if (!array->data)
 	{
-		array->data[i] = rand();
+		fprintf(stderr, "Error: memory allocation failed.\n");
+		free(array);
+		return (NULL);
 	}
+	for (unsigned int i = 0; i < size; i++)
+		array->data[i] = rand();
 	return (array);
 }
 
