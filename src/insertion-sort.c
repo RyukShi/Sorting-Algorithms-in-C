@@ -7,7 +7,7 @@ void	insertion_sort(Array *array)
 	{
 		temp = array->data[i];
 		j = i - 1;
-		while (temp < array->data[j] && j >= 0)
+		while (j >= 0 && temp < array->data[j])
 		{
 			array->data[j + 1] = array->data[j];
 			j--;
