@@ -49,3 +49,23 @@ install(TARGETS sorting_algorithms DESTINATION lib)
 install(TARGETS analytics DESTINATION lib)
 install(TARGETS array DESTINATION lib)
 install(FILES ${SORTING_ALGORITHMS_HEADERS} DESTINATION include)
+
+enable_testing()
+
+find_program(VALGRIND "valgrind")
+
+file(GLOB FILES "${CMAKE_CURRENT_SOURCE_DIR}/test-*.c")
+
+foreach(FILENAME ${FILES})
+  get_filename_component(SRC ${FILENAME} NAME)
+  get_filename_component(TEST ${FILENAME} NAME_WE)
+  add_executable(${TEST} ${SRC})
+  add_dependencies(${TEST} sorting_algorithms)
+  target_link_libraries(${TEST} sorting_algorithms)
+  if(VALGRIND)
+    add_test("${TEST}[valgrind]" ${VALGRIND} --leak-check=full --quiet --error-exitcode=1 ./${TEST})
+    add_test("${TEST}[normal]" ./${TEST})
+  else()
+    add_test("${TEST}" ./${TEST})
+  endif()
+endforeach()
