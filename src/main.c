@@ -1,11 +1,4 @@
-#include "./analytics.h"
-#include "./array.h"
-#include "./sorting-algorithms.h"
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+#include "./main.h"
 
 #define VERBOSE 1
 
@@ -43,7 +36,7 @@ static void	analytics(char *algorithm_name,
 	bool	sorted;
 
 	double time_taken, avg;
-	times = (double *)malloc(repeat * sizeof(double));
+	times = malloc(repeat * sizeof(double));
 	while (start_size <= max_size)
 	{
 		for (unsigned i = 0; i < repeat; i++)
