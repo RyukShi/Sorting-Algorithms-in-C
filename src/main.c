@@ -67,62 +67,58 @@ static void	analytics(char *algorithm_name,
 
 int	main(void)
 {
-	FILE	*bubble_insertion_selection_counting;
-	FILE	*merge_quick_radix;
+	FILE	*data_file;
 
-	merge_quick_radix = open_file("merge_quick_radix");
-	bubble_insertion_selection_counting = open_file(
-		"bubble_insertion_selection_counting");
+	data_file = open_file("data_file");
 	analytics("merge sort",
 				merge_sort_wrapper,
-				merge_quick_radix,
+				data_file,
 				8,
 				10000,
 				1500000,
 				1.115f);
 	analytics("quick sort",
 				quick_sort_wrapper,
-				merge_quick_radix,
+				data_file,
 				8,
 				10000,
 				1500000,
 				1.115f);
 	analytics("radix sort",
 				radix_sort,
-				merge_quick_radix,
+				data_file,
 				8,
 				10000,
 				1500000,
 				1.115f);
 	analytics("bubble sort",
 				bubble_sort,
-				bubble_insertion_selection_counting,
+				data_file,
 				4,
 				1000,
 				250000,
 				1.25f);
 	analytics("insertion sort",
 				insertion_sort,
-				bubble_insertion_selection_counting,
+				data_file,
 				4,
 				1000,
 				450000,
 				1.25f);
 	analytics("selection sort",
 				selection_sort,
-				bubble_insertion_selection_counting,
+				data_file,
 				4,
 				1000,
 				450000,
 				1.25f);
 	analytics("counting sort",
 				counting_sort,
-				bubble_insertion_selection_counting,
+				data_file,
 				1,
 				1000,
 				450000,
 				1.25f);
-	close_file(merge_quick_radix);
-	close_file(bubble_insertion_selection_counting);
+	close_file(data_file);
 	return (EXIT_SUCCESS);
 }
