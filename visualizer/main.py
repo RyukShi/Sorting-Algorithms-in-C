@@ -1,17 +1,36 @@
 from visualizer import plot_execution_time, extract_data
+from forecasting import extrapolate
 
 
 def main():
-    merge_quick_radix_df = extract_data('merge_quick_radix')
+    df = extract_data("data_file")
+
+    slowest_algorithms = [
+        "insertion sort",
+        "selection sort",
+        "bubble sort"
+    ]
+    slowest_df = df.query("algorithm_name in @slowest_algorithms")
     plot_execution_time(
-        merge_quick_radix_df,
-        'merge_quick_radix.html'
+        slowest_df,
+        "slowest_algorithms.html"
     )
-    bubble_insertion_selection_counting_df = extract_data(
-        'bubble_insertion_selection_counting')
+
+    fastest_algorithms = [
+        "merge sort",
+        "quick sort",
+        "radix sort",
+    ]
+    fastest_df = df.query("algorithm_name in @fastest_algorithms")
     plot_execution_time(
-        bubble_insertion_selection_counting_df,
-        'bubble_insertion_selection_counting.html'
+        fastest_df,
+        "fastest_algorithms.html"
+    )
+
+    extra_bubble_sort_df = extrapolate(df, "bubble sort", "quadratic")
+    plot_execution_time(
+        extra_bubble_sort_df,
+        "extra_bubble_sort"
     )
 
 

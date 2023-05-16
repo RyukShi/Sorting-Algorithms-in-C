@@ -22,7 +22,7 @@ def extract_data(file_name: str):
 
 def plot_execution_time(
     df: DataFrame,
-    html_file_name: str,
+    html_file_name: str = None,
     log_x: bool = False,
     log_y: bool = False
 ):
@@ -37,6 +37,8 @@ def plot_execution_time(
     if log_y:
         fig.update_layout(yaxis_type="log")
     if html_file_name:
+        if not html_file_name.endswith('.html'):
+            html_file_name += '.html'
         fig.write_html(html_file_name)
         print(f"{html_file_name} file created successfully!")
     else:
