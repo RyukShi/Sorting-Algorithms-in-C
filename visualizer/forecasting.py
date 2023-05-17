@@ -5,6 +5,7 @@ from numpy import linspace
 def extrapolate(
         df: DataFrame,
         algorithm: str,
+        array_size_max: int,
         method: str = "linear",
         window_length: int = 7,
         polyorder: int = 3):
@@ -23,7 +24,7 @@ def extrapolate(
 
     x_extrapolated = linspace(
         filtered_df["array_size"].min(),
-        filtered_df["array_size"].max() * 4, 1000)
+        array_size_max, 1000)
 
     y_extrapolated = f(x_extrapolated)
 
