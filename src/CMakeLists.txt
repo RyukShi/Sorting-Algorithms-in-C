@@ -18,6 +18,7 @@ set(SORTING_ALGORITHMS_SOURCES
     quick-sort.c
     counting-sort.c
     radix-sort.c
+    heap-sort.c
 )
 
 # Create "SORTING_ALGORITHMS_HEADERS" variable to merge all header files
@@ -29,6 +30,7 @@ set(SORTING_ALGORITHMS_HEADERS
     quick-sort.h
     counting-sort.h
     radix-sort.h
+    heap-sort.h
 )
 
 # Create sorting_algorithms library
