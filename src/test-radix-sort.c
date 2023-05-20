@@ -11,4 +11,5 @@ int	main(void)
 	radix_sort(random_arr);
 	assert(is_sorted(random_arr) == true);
 	destroy_array(random_arr);
+	return (0);
 }
