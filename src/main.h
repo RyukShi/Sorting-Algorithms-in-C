@@ -10,6 +10,7 @@
 #include "./quick-sort.h"
 #include "./radix-sort.h"
 #include "./selection-sort.h"
+#include "./heap-sort.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>

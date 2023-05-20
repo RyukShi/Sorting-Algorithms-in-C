@@ -91,6 +91,13 @@ int	main(void)
 				10000,
 				1500000,
 				1.115f);
+	analytics("heap sort",
+				heap_sort,
+				data_file,
+				8,
+				10000,
+				1500000,
+				1.115f);
 	analytics("bubble sort",
 				bubble_sort,
 				data_file,
