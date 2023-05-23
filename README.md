@@ -8,7 +8,7 @@ This repository contains a project that compares the performance of various sort
 
 These are relevant charts that represent the execution times of different sorting algorithms according to the size of the array to be sorted.
 
-![Merge & Quick & Radix](./assets/images/merge_quick_radix.png "Merge & Quick & Radix")
+![Fastest Algorithms](./assets/images/fastest_algorithms.png "Fastest Algorithms")
 
 ![Bubble & Insertion & Selection & Counting](./assets/images/bubble_insertion_selection_counting.png "Bubble & Insertion & Selection & Counting")
 
@@ -16,7 +16,7 @@ These are relevant charts that represent the execution times of different sortin
 
 I had the idea to make an extrapolation on the existing data, here are the charts which predict the execution time according to the size of the array.
 
-![Extra Merge & Quick & Radix](./assets/images/extra_merge_quick_radix.png "Extra Merge & Quick & Radix")
+![Extra Fastest Algorithms](./assets/images/extra_fastest_algorithms.png "Extra Fastest Algorithms")
 
 ![Extra Bubble & Insertion & Selection & Counting](./assets/images/extra_bubble_insertion_selection_counting.png "Extra Bubble & Insertion & Selection & Counting")
 
